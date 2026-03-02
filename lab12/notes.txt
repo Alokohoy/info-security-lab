@@ -1,0 +1,112 @@
+Lab 12: Brute-force attacks (local demo)
+Date: 2026-03-02
+
+Disclaimer
+This lab is for authorized, local testing only. Do not run brute-force attacks against real systems without permission.
+
+Overview
+A brute-force attack tries many username/password combinations until a valid one is found. It can be simple, dictionary-based, or use known personal info to generate guesses.
+
+Types of brute-force attacks
+- Simple brute-force: tries all combinations
+- Dictionary attack: tries common passwords from a list
+- Credential stuffing: reuses leaked username/password pairs
+- Reverse brute-force: same password across many users
+- Hybrid attack: dictionary + small variations
+
+Hydra in brief
+Hydra is a testing tool that automates login attempts for many protocols. In this lab it targets a local HTTP form.
+
+Part 1: Create a local FastAPI login service
+
+1) Create and activate a virtual environment, then install FastAPI
+```bash
+mkdir brute-force-server
+cd brute-force-server
+python3 -m venv venv
+source venv/bin/activate
+pip install "fastapi[standard]"
+```
+
+2) Create `main.py`
+```python
+from typing import Annotated
+
+from fastapi import FastAPI, Form
+
+app = FastAPI()
+
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "12345admin"
+
+@app.post("/login")
+def login(
+    username: Annotated[str, Form()],
+    password: Annotated[str, Form()]
+):
+    if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+        return "secret token"
+    return "Invalid credentials"
+```
+
+3) Run the server
+```bash
+fastapi dev main.py
+```
+Expected: server running at http://127.0.0.1:8000.
+
+Part 2: Install Hydra and run a local test
+
+1) Install Hydra
+```bash
+sudo apt update
+sudo apt install hydra
+```
+
+2) Prepare small username/password lists
+Place `usernames.txt` and `passwords.txt` in the same directory.
+
+3) Run Hydra
+```bash
+hydra -f -I -V -L usernames.txt -P passwords.txt -s 8000 localhost http-form-post "/login:username=^USER^&password=^PASS^:F=Invalid"
+```
+
+Key flags
+- `-f`: stop after first valid login
+- `-I`: ignore non-critical errors
+- `-V`: show each attempt
+- `-L`, `-P`: username/password lists
+- `-s 8000`: target port
+- `http-form-post`: HTTP POST form test
+
+Expected result
+Hydra prints the first valid username/password pair when found.
+
+Task: Attacks using personal information
+Idea: attackers often generate guesses from a victim's public data (name, surname, date of birth, nickname).
+
+Example data
+- Name: Ali
+- Surname: Karimov
+- DOB: 2002-04-16
+- Nickname: alik
+
+Possible combinations (examples only)
+- ali2002
+- ali0416
+- karimov2002
+- alik16
+- ali_karimov
+- Ali2002!
+
+How this is used
+1) Collect public info from social media or leaks.
+2) Generate combinations using simple rules.
+3) Add common suffixes: 123, 2024, !, @, etc.
+4) Run a dictionary or hybrid attack with the generated list.
+
+Ethics and safety
+Only test on systems you own or have permission to assess. Rate-limit tests and keep lists small in a lab.
+
+Conclusion
+This lab demonstrates a safe, local brute-force test and shows how personal info can increase guess success in weak password scenarios.

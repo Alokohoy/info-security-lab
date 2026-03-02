@@ -1,0 +1,78 @@
+Lab 9: Package management (APT) + nginx
+Date: 2026-03-02
+
+Short theory
+A package in Linux is a bundle of executables, libraries, config files, and metadata. A package manager installs, updates, and removes packages while resolving dependencies.
+
+Common package formats
+- .deb (Debian/Ubuntu)
+- .rpm (Fedora/CentOS)
+- .tar.gz / .tar.bz2 (source archives)
+
+APT in brief
+APT (Advanced Package Tool) is the standard package manager for Debian-based systems. It downloads software from repositories and handles dependencies.
+
+Core commands
+- sudo apt update            -> refresh package index
+- sudo apt upgrade           -> upgrade installed packages
+- sudo apt install <pkg>     -> install a package
+- sudo apt remove <pkg>      -> remove a package (keeps configs)
+- sudo apt purge <pkg>       -> remove package + configs
+- sudo apt search <term>     -> search packages
+- apt-cache depends <pkg>    -> show dependencies
+
+Task: Explore nginx
+
+Note: the outputs below are expected examples; your system may differ.
+
+1) Update index
+Command:
+  sudo apt update
+What to expect: package list refresh, no installs yet.
+
+2) Search nginx
+Command:
+  sudo apt search nginx
+What to expect: nginx, nginx-core, nginx-full, nginx-extras, etc.
+
+3) Check dependencies
+Command:
+  apt-cache depends nginx
+What to expect: libraries like libc6, libpcre3, zlib1g and other required packages.
+
+4) Install nginx
+Command:
+  sudo apt install nginx
+What to expect: nginx installed and service created.
+
+5) Verify version
+Command:
+  nginx -v
+What to expect: nginx version string.
+
+6) Check service status
+Command:
+  systemctl status nginx
+What to expect: service is active (running).
+
+7) Test locally
+Command:
+  curl -I http://localhost
+What to expect: HTTP/1.1 200 OK and Server: nginx header.
+
+8) Useful files and paths
+- Main config: /etc/nginx/nginx.conf
+- Site configs: /etc/nginx/sites-available/
+- Enabled sites: /etc/nginx/sites-enabled/
+- Web root: /var/www/html
+- Logs: /var/log/nginx/access.log and /var/log/nginx/error.log
+
+9) Optional cleanup
+Command:
+  sudo apt remove nginx
+or
+  sudo apt purge nginx
+What to expect: nginx removed; purge deletes configs.
+
+Conclusion
+APT gives a clean workflow for installing and maintaining software. The nginx task demonstrates search, dependency inspection, installation, verification, and cleanup in one flow.

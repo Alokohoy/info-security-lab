@@ -1,0 +1,25 @@
+$ sudo apt install vim
+$ cd /Users/burkhan/PycharmProjects/info-security-lab/lab8
+$ touch file.txt
+$ vim file.txt
+
+# In Vim (insert mode):
+i
+some text
+more text
+even more text
+<ESC>
+
+# Delete current line:
+DD
+
+# Delete all content:
+:%d
+
+# Save:
+:w
+
+# Save and quit:
+:wq
+
+Task: Explore more Vim commands (search, replace, yank/paste, split windows).

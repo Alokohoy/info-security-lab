@@ -1,0 +1,30 @@
+Lab 8: Vim basics
+Date: 2026-03-02
+
+Goal
+Practice basic Vim editing, saving, and extra commands (search, replace, yank/paste, split windows).
+
+Setup
+- Install Vim: sudo apt install vim
+- Open the file: vim file.txt
+
+Basic editing
+- Enter insert mode: i
+- Exit insert mode: Esc
+- Delete current line: dd
+- Delete all content: :%d
+- Save: :w
+- Save and quit: :wq
+
+Extra commands
+- Search: /word then press n for next match
+- Replace in line: :s/old/new
+- Replace all: :%s/old/new/g
+- Yank line: yy
+- Paste below: p
+- Split horizontally: :split
+- Split vertically: :vsplit
+- Switch split: Ctrl-w w
+
+Notes
+Use :help <command> for quick help inside Vim.

@@ -1,0 +1,20 @@
+# Lab 11 commands (sample)
+
+# youtube-dl (source install)
+sudo apt update
+sudo apt install python3 python3-pip python3-setuptools git
+
+git clone https://github.com/ytdl-org/youtube-dl.git
+cd youtube-dl
+sudo python3 setup.py install
+youtube-dl --version
+
+# neofetch (source install)
+cd ..
+sudo apt update
+sudo apt install git make
+
+git clone https://github.com/dylanaraps/neofetch.git
+cd neofetch
+sudo make install
+neofetch

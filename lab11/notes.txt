@@ -1,0 +1,94 @@
+Lab 11: Installing packages from source
+Date: 2026-03-02
+
+Overview
+Installing from source means you download code, build it, and install it yourself. It is useful when you need the latest version, custom build options, or when no prebuilt package exists.
+
+Why install from source
+- Latest features and fixes
+- Custom build options
+- Optimization for your system
+- Works when no package is available
+
+Common methods
+1) Classic ./configure + make
+2) CMake-based builds
+3) Build from a Git repo
+4) Installer scripts (install.sh / setup.py)
+
+Method 1: Classic build (tar.gz)
+Example flow:
+  wget https://example.com/software-1.0.tar.gz
+  tar -xvzf software-1.0.tar.gz
+  cd software-1.0
+  ./configure
+  make
+  sudo make install
+
+Method 2: CMake build
+Example flow:
+  git clone https://github.com/example/example-software.git
+  cd example-software
+  mkdir build
+  cd build
+  cmake ..
+  make
+  sudo make install
+
+Method 3: From Git
+Example flow:
+  git clone https://github.com/example/example-software.git
+  cd example-software
+  make
+  sudo make install
+
+Method 4: Install scripts
+Example flow:
+  wget https://example.com/install.sh
+  chmod +x install.sh
+  ./install.sh
+
+Practical example: youtube-dl (Python)
+1) Install dependencies
+  sudo apt update
+  sudo apt install python3 python3-pip python3-setuptools git
+
+2) Clone repo
+  git clone https://github.com/ytdl-org/youtube-dl.git
+  cd youtube-dl
+
+3) Install
+  sudo python3 setup.py install
+
+4) Verify
+  youtube-dl --version
+
+Practical example: neofetch (Bash script)
+1) Install dependencies
+  sudo apt update
+  sudo apt install git make
+
+2) Clone repo
+  git clone https://github.com/dylanaraps/neofetch.git
+  cd neofetch
+
+3) Install
+  sudo make install
+
+4) Verify
+  neofetch
+
+Task: install simple utilities from GitHub
+Pick 1-2 small tools and document:
+- Repo URL
+- Commands used to build/install
+- How you verified it works (version or sample run)
+
+Troubleshooting tips
+- If ./configure is missing, check README for build steps.
+- If a build fails, install missing dependencies and retry.
+- Use sudo only for install steps.
+- If the command is not found, check your PATH.
+
+Conclusion
+Source installation teaches build workflows and gives full control over versions and options.

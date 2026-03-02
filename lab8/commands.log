@@ -1,0 +1,4 @@
+# Lab 8 commands (sample)
+sudo apt install vim
+cd /Users/burkhan/PycharmProjects/info-security-lab/lab8
+vim file.txt

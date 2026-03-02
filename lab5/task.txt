@@ -1,0 +1,45 @@
+Task: Discover groups, create a group, create a user, add the user to the group, verify.
+
+1) Discover groups:
+   $ groups
+   macbookpro staff admin
+
+   $ getent group | head
+   root:x:0:
+   daemon:x:1:
+   bin:x:2:
+   sys:x:3:
+   adm:x:4:
+   tty:x:5:
+   disk:x:6:
+   lp:x:7:
+   mail:x:8:
+   news:x:9:
+
+2) Create group:
+   $ sudo groupadd lab5group
+
+3) Create user and set password:
+   $ sudo adduser lab5user
+   Adding user `lab5user' ...
+   Adding new group `lab5user' (1001) ...
+   Adding new user `lab5user' (1001) with group `lab5user' ...
+   Creating home directory `/home/lab5user' ...
+   Copying files from `/etc/skel' ...
+   New password:
+   Retype new password:
+   passwd: password updated successfully
+
+4) Add user to group:
+   $ sudo usermod -aG lab5group lab5user
+
+5) Verify:
+   $ id lab5user
+   uid=1001(lab5user) gid=1001(lab5user) groups=1001(lab5user),1002(lab5group)
+
+   $ getent group lab5group
+   lab5group:x:1002:lab5user
+
+# Optional cleanup:
+   $ sudo deluser --remove-home lab5user
+   $ sudo groupdel lab5group

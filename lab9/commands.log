@@ -1,0 +1,8 @@
+# Lab 9 commands (sample)
+sudo apt update
+sudo apt search nginx
+apt-cache depends nginx
+sudo apt install nginx
+nginx -v
+systemctl status nginx
+curl -I http://localhost

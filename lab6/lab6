@@ -1,0 +1,18 @@
+Task: Change file owner/group and observe access effects.
+
+Example:
+$ touch file.txt
+$ ls -la
+-rw-r--r-- 1 macbookpro staff 0 Jan 28 12:00 file.txt
+
+# Change owner and group:
+$ sudo chown lab6user:lab6group file.txt
+$ ls -la
+-rw-r--r-- 1 lab6user lab6group 0 Jan 28 12:00 file.txt
+
+# Test access as another user:
+$ sudo -u lab6user cat file.txt
+$ sudo -u lab6user echo "hi" >> file.txt
+# If permission denied, adjust:
+$ sudo chmod 640 file.txt
+$ sudo -u lab6user cat file.txt

@@ -1,0 +1,82 @@
+Lab 10: Configuring NGINX + proxy_pass
+Date: 2026-03-02
+
+Overview
+NGINX is a high-performance web server and reverse proxy. It can serve static files, forward requests to backend apps, load balance, and handle SSL termination.
+
+Where configs live (Ubuntu/Debian)
+- Main config: /etc/nginx/nginx.conf
+- Sites available: /etc/nginx/sites-available/
+- Sites enabled: /etc/nginx/sites-enabled/
+
+Install nginx
+sudo apt update
+sudo apt install nginx
+
+Basic static site on port 8000
+1) Create a site config
+sudo nano /etc/nginx/sites-available/my_site
+
+server {
+    listen 8000;
+    server_name localhost;
+    root /var/www/html;
+    index my_site.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+
+2) Create a simple HTML page
+sudo nano /var/www/html/my_site.html
+
+<div>My site on 8000</div>
+
+3) Enable the site and reload
+sudo ln -s /etc/nginx/sites-available/my_site /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+
+Check in browser: http://localhost:8000
+
+proxy_pass: send requests to your API
+Goal: forward requests from NGINX to a running API (example: http://127.0.0.1:5000).
+
+1) Create a proxy config
+sudo nano /etc/nginx/sites-available/api_proxy
+
+server {
+    listen 8080;
+    server_name localhost;
+
+    location / {
+        proxy_pass http://127.0.0.1:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+2) Enable and reload
+sudo ln -s /etc/nginx/sites-available/api_proxy /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+
+3) Test
+curl -i http://localhost:8080/
+Expected: response from your API, but served through NGINX.
+
+Notes on proxy_pass behavior
+- If proxy_pass ends with a slash, NGINX may replace the URI part differently.
+- Use a fixed upstream URL for simple labs: http://127.0.0.1:5000.
+- If your API is on another port, change the number.
+
+Troubleshooting
+- Check config syntax: sudo nginx -t
+- Check error log: sudo tail -f /var/log/nginx/error.log
+- Make sure the API is running and reachable from localhost.
+
+Conclusion
+This lab shows a static site on port 8000 and a reverse proxy using proxy_pass on port 8080.

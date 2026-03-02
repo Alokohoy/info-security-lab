@@ -1,0 +1,16 @@
+# Lab 12 commands (sample)
+mkdir brute-force-server
+cd brute-force-server
+python3 -m venv venv
+source venv/bin/activate
+pip install "fastapi[standard]"
+
+# Run the local server (in lab12/)
+fastapi dev main.py
+
+# Install Hydra
+sudo apt update
+sudo apt install hydra
+
+# Run local brute-force demo (from lab12/)
+hydra -f -I -V -L usernames.txt -P passwords.txt -s 8000 localhost http-form-post "/login:username=^USER^&password=^PASS^:F=Invalid"
