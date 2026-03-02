@@ -1,0 +1,37 @@
+Lab 13: Keylogger (local, authorized demo)
+
+Disclaimer
+This lab is for local, authorized testing only. Keylogging on real users without permission is illegal and unethical.
+
+Overview
+A keylogger records keyboard input. It can be software-based (apps, OS-level hooks) or hardware-based (devices between keyboard and computer).
+
+Types
+- Software keyloggers
+- Hardware keyloggers
+
+Legitimate uses
+- Parental control
+- Employee monitoring (with policy/consent)
+- Security testing in controlled labs
+
+Task summary
+Create a Python keylogger, log data to log.txt, then send that log to an API endpoint.
+
+Steps
+1) Create a new folder and install dependencies
+2) Run the script for ~10 seconds
+3) Check log.txt output
+4) Set API_URL to upload logs to your API
+
+API upload idea
+The script POSTs JSON like {"log": "..."} to your API endpoint.
+Example:
+  API_URL="http://127.0.0.1:8000/log" python main.py
+
+Expected result
+- log.txt contains the typed text.
+- If API_URL is set, the same log is sent to the server.
+
+Conclusion
+This lab shows how keyloggers work and why strong access controls and monitoring are important.
