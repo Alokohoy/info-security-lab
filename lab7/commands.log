@@ -1,0 +1,11 @@
+# Lab 7 commands (sample)
+cd /Users/burkhan/PycharmProjects/info-security-lab/lab7
+chmod +x write_line.sh
+./write_line.sh
+cat file.txt
+export SMTP_HOST=smtp.example.com
+export SMTP_PORT=587
+export SMTP_USER=user@example.com
+export SMTP_PASS=app_password
+export MAIL_TO=dest@example.com
+python3 send_email.py

@@ -1,0 +1,12 @@
+# Lab 5 commands (sample)
+cd /Users/burkhan/PycharmProjects/info-security-lab/lab5
+groups
+getent group | head
+sudo groupadd lab5group
+sudo adduser lab5user
+sudo usermod -aG lab5group lab5user
+id lab5user
+getent group lab5group
+# cleanup
+sudo deluser --remove-home lab5user
+sudo groupdel lab5group

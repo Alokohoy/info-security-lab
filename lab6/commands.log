@@ -1,0 +1,10 @@
+# Lab 6 commands (sample)
+sudo -u lab6user cat file.txt
+sudo chmod 640 file.txt
+sudo -u lab6user echo "hi" >> file.txt
+sudo -u lab6user cat file.txt
+ls -la file.txt
+sudo chown lab6user:lab6group file.txt
+ls -la file.txt
+touch file.txt
+cd /Users/burkhan/PycharmProjects/info-security-lab/lab6

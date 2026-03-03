@@ -1,0 +1,10 @@
+# Lab 4 commands (sample)
+cd /Users/burkhan/PycharmProjects/info-security-lab/lab4
+python3 -m venv venv
+source venv/bin/activate
+pip install flask flask-cors
+python3 server.py
+curl -X POST http://127.0.0.1:8000/submit \
+  -H "Content-Type: application/json" \
+  -d '{"cardholder":"Test User","cardnumber":"4111111111111111","expiry":"12/30","cvv":"123","address":"Astana"}'
+cat card_data.txt

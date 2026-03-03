@@ -1,0 +1,9 @@
+Lab 3 quick notes
+- Purpose: toy shell that lists files/folders older than a given date (creation time).
+- Input format: YYYY-MM-DD.
+- Exit: type exit or press Ctrl+C and then type exit.
+
+Example session
+1) Run: python3 toy_shell.py
+2) Input: 2024-01-01
+3) Output: files/folders created before that date

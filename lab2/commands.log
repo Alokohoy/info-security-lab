@@ -1,0 +1,7 @@
+# Lab 2 commands (sample)
+./delete_empty_files.sh
+./count_word.sh ../lab1/filename.json
+./current_time.sh
+./greet.sh
+chmod +x greet.sh current_time.sh count_word.sh delete_empty_files.sh
+cd /Users/burkhan/PycharmProjects/info-security-lab/lab2

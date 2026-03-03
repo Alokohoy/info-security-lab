@@ -1,0 +1,6 @@
+# Lab 3 commands (sample)
+cd /Users/burkhan/PycharmProjects/info-security-lab/lab3
+python3 toy_shell.py
+
+# inside the toy shell
+exit

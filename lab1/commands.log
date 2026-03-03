@@ -1,0 +1,5 @@
+# Lab 1 commands (sample)
+cd /Users/burkhan/PycharmProjects/info-security-lab/lab1
+ls
+python3 -m json.tool filename.json | head -n 20
+wc -l filename.json
